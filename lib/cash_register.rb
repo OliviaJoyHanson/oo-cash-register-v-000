@@ -1,25 +1,22 @@
 require 'pry'
 
 class CashRegister
-
-  attr_accessor :discount, :total
+  attr_accessor :discount, :total, :items
 
   def initialize(discount = 0)
-    @total = 0
     @discount = discount
-    @cart = []
+    @total = 0
+    @items = []
+  end
+
+  def total
+    @total
   end
 
   def add_item(title, price, quantity = 1)
-    @total += price * quantity
-    count = 0
-    if quantity == 1
-      @cart << title
-    else
-      until count == quantity
-        @cart << title
-        count += 1
-      end
+    self.total += (price*quantity)
+    until self.items.select{|item| item == title}.length == quantity
+      self.items << title
     end
   end
 
@@ -27,17 +24,14 @@ class CashRegister
     if @discount == 0
       "There is no discount to apply."
     else
-      @total -= @total * @discount / 100
-      "After the discount, the total comes to $#{@total}."
+      self.total -= (self.total/(100/@discount))
+      "After the discount, the total comes to $#{self.total}."
     end
   end
 
   def items
-    @cart
+    @items
   end
 
-  def void_last_transaction
-     @total = 0.0
-  end
 
 end
