@@ -7,6 +7,7 @@ class CashRegister
     @discount = discount
     @total = 0
     @items = []
+    @prices = []
   end
 
   def total
@@ -17,6 +18,7 @@ class CashRegister
     self.total += (price*quantity)
     until self.items.select{|item| item == title}.length == quantity
       self.items << title
+      self.prices << price
     end
   end
 
@@ -33,5 +35,12 @@ class CashRegister
     @items
   end
 
+  def prices
+    @prices
+  end
+
+  def void_last_transaction
+
+  end
 
 end
