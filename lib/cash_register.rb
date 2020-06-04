@@ -20,10 +20,6 @@ class CashRegister
       @items << title
     end
     @last_transaction = [title, price, quantity]
-    #until self.items.select{|item| item == title}.length == quantity
-    #  self.items << title
-    #  self.prices << price
-    #end
   end
 
   def apply_discount
